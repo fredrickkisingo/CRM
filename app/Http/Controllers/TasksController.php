@@ -67,7 +67,7 @@ class TasksController extends Controller
         try {
             
 
-            dd($request);
+           
             $task = Task::where('id', $request['record_id'])
                 ->update(['status'=>request()->input('status')]);
 
@@ -166,7 +166,9 @@ class TasksController extends Controller
 
     }elseif($tasks_filter =='today'){
 
-        
+        $filter = date('l');
+     
+    
         $tasks = DB::table('tasks')
         ->select(
                 'tasks.title as title',
@@ -177,10 +179,27 @@ class TasksController extends Controller
 
         )
         ->where('tasks.user_id',$user_id)
-        ->orderBy('tasks.created_at','desc')->paginate(20);
+        ->orderBy('tasks.created_at','desc')->get();
+        
+        $tasks_arrays = json_decode($tasks);
+        $records = [];
+        foreach($tasks_arrays as $tasks_array){
+            $repetitive_array=$tasks_array->repetitive_array;
+            $days_array = json_decode($repetitive_array);
 
-        $records=array($tasks);
-        $records=$records[0];
+            $count = count($days_array->day); 
+
+            for($i = 0; $i < $count; $i ++){
+                $day = $days_array->day[$i];
+
+                
+                if($day == $filter){
+                    array_push($records, $tasks_array);
+                }
+            }
+
+        }
+        $records=($records);
         return view('tasks/index_tomorrow')->with('records',$records);
 
     }

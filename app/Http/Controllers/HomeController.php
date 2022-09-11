@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB as DB;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +26,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $user_id=Auth::user()->id;
+
+                    $records = DB::table('tasks')
+                    ->select(
+                            'tasks.id as id',
+                            'tasks.title as title',
+                            'tasks.description as description',
+                            'tasks.status as status',
+                            'tasks.type_of_task as  type_of_task',
+                    
+                    )
+                    ->where('tasks.user_id',$user_id)
+                    ->orderBy('tasks.created_at','desc')->paginate(5);
+
+
+        return view('home')->with('records',$records);
     }
 }

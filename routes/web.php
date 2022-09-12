@@ -25,6 +25,6 @@ Route::get('tasks_index', 'TasksController@index')->name('tasks.index');
 Route::get('tasks_tomorrow', 'TasksController@renderTomorrowsTask');
 Route::get('tasks_status/modal/{id}', 'TasksController@getTaskStatus')->name('tasks.status_modal');
 
-Route::put('tasks_status/{id}', 'TasksController@postTaskStatus');
+Route::put('tasks_status', 'TasksController@postTaskStatus');
 
 });

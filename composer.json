@@ -16,7 +16,6 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "2.4",
         "laravelcollective/html": "^6.3",
-        "t1k3/laravel-calendar-event": "0.2.0",
         "yajra/laravel-datatables-oracle": "^9.21"
     },
     "require-dev": {

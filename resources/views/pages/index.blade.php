@@ -6,7 +6,7 @@
         {{--this is the main index page--}}
       <h1>{{$title}}</h1>
       <p>
-        Welcome to JABU CRM
+        Your all in one task manager
       </p>
   </div>
     <footer>

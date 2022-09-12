@@ -40,15 +40,5 @@
 </div>
 
 @section('javascript')
-<script>
-  selected_record = (data) => {
-
-    record = JSON.parse(data);
-
-    console.log(record)
-      $('input[name="record_id"]').val(record['id']);
-
-  }
-</script>
-
+<script src="{{ asset('js/tasks.js') }}"></script>
 @endsection

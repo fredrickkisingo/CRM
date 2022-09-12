@@ -93,12 +93,22 @@ $(document).ready(function() {
 //daterangepicker
 
 
+selected_record = (data) => {
+
+    record = JSON.parse(data);
+
+      $('input[name="record_id"]').val(record['id']);
+
+  }
+
     $('#monthly_once').daterangepicker({
        
         singleDatePicker: true,
     showDropdowns: true,
         hideIfNoPrevNext: true,
-        dateFormat: 'mm/dd'
+        dateFormat: 'mm/dd',
+        changeYear: false
+
 
     });
 
@@ -107,6 +117,8 @@ $(document).ready(function() {
         singleDatePicker: true,
              showDropdowns: true,
         hideIfNoPrevNext: true,
+        dateFormat: 'mm/dd',
+        changeYear: false
     });
 
     //hide month if it is monthly once
@@ -114,29 +126,30 @@ $('.daterangepicker select.monthselect ').css('display','none');
 
 
 
-//get list of tasks in form of datatables
+        //get list of tasks in form of datatables
 
 
-$('#task_filter').on('change', function() {
+        $('#task_filter').on('change', function() {
 
-    var data= {'tasks_filter': $('#task_filter').val()}
-        console.log(data)
-        $.ajax({
-            method: 'GET',
-            url: 'tasks_tomorrow',
-            data: data,
-            dataType: 'html',
-            success: function(result) {
-                console.log(result)
-                $('#new_table').html(result);
-                $('#old_table').html('');
-    
-    
-    
-            }, 
-        });
-    
-    });
+           
+            var data= {'tasks_filter': $('#task_filter').val()}
+             
+                $.ajax({
+                    method: 'GET',
+                    url: 'tasks_tomorrow',
+                    data: data,
+                    dataType: 'html',
+                    success: function(result) {
+                        console.log(result)
+                        $('#new_table').html(result);
+                        $('#old_table').html('');
+            
+            
+            
+                    }, 
+                });
+            
+            });
 
 
   

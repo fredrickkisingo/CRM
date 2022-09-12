@@ -17,9 +17,7 @@
                                             </tr>
                                         </thead>
                                 
-                                        @php
-                                            \Log::info($records);
-                                        @endphp
+                                   
                                         @foreach($records as $record)
                                         <tr>
                                             <td>{{$record->title}}</td>

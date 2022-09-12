@@ -1,9 +1,11 @@
-<a href="#" class="btn btn-primary btn-sm" data-target="#status_modal" data-toggle="modal">Change Status</a>
+<a href="#" class="btn btn-primary btn-sm" data-target="#status_modal" data-toggle="modal"            
+ onclick="selected_record('{{ json_encode($selected_record) }}')"
+    >Change Status</a>
 <div class="modal fade" id="status_modal" tabindex="-1" role="dialog" aria-labelledby="status_modal"  aria-hidden="true">
 <div class="modal-dialog" role="document" id="status_modal">
-    {!! Form::open(['url' => action('TasksController@postTaskStatus',$selected_record->id), 'id' => 'status_modal', 'method' => 'put']) !!}
+    {!! Form::open(['url' => action('TasksController@postTaskStatus'), 'id' => 'status_modal', 'method' => 'put']) !!}
     
-    <input type="hidden" id="record_id" value="{{$selected_record->id}}">
+    <input type="hidden" id="record_id" name="record_id"value="">
 
     <div class="modal-content" id="status_modal">
         <div class="modal-header">
@@ -36,3 +38,17 @@
      {!! Form::close() !!}
 </div><!-- /.modal-dialog -->
 </div>
+
+@section('javascript')
+<script>
+  selected_record = (data) => {
+
+    record = JSON.parse(data);
+
+    console.log(record)
+      $('input[name="record_id"]').val(record['id']);
+
+  }
+</script>
+
+@endsection
